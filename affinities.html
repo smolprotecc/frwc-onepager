@@ -1,0 +1,211 @@
+<body></body>
+<script>
+
+links = {
+  traits          : 'https://etherscan.io/tx/0x1be4aa782c9dc164ecbf2cd155537e7250b344f405dff03b5c33fdd63261c80e',
+  traitDecoder    : 'https://github.com/aleb-user/LostGrimoire/blob/master/scripts/decoder/decode.ts',
+  exchangeActivity: 'https://opensea.io/activity/forgottenruneswizardscult',
+  roadmap         : 'https://www.forgottenrunes.com/posts/roadmap',
+  site            : 'https://forgottenrunes.com',
+  guide           : 'https://wizards.guide/',
+  
+  dotta           : 'https://github.com/cryppadotta',
+  elfj            : 'https://rarible.com/elfjtrul',
+  
+  keymaster       : 'https://opensea.io/assets/0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42/777',
+  skramps         : 'https://opensea.io/collection/forgottenruneswizardscult?collectionSlug=forgottenruneswizardscult&search[stringTraits][0][name]=familiar&search[stringTraits][0][values][0]=Skramps',
+  cockatrice      : 'https://opensea.io/collection/forgottenruneswizardscult?collectionSlug=forgottenruneswizardscult&search[stringTraits][0][name]=familiar&search[stringTraits][0][values][0]=Mesozoic%20Cockatrice',
+  snail           : 'https://opensea.io/collection/forgottenruneswizardscult?collectionSlug=forgottenruneswizardscult&search[stringTraits][0][name]=familiar&search[stringTraits][0][values][0]=Astral%20Snail',
+  hothor          : 'https://opensea.io/assets/0x521f9C7505005CFA19A8E5786a9c3c9c9F5e6f42/1354',
+  rarityTools     : 'https://rarity.tools/forgottenruneswizardscult',
+}
+
+origin = `
+"Affinities, eh? Whatcha wanna know?" <i>*burp*</i>  "Well then, grab us a beer, pull up a chair and listen carefully."
+
+"When the <a href="${links.site}" target="_blank">Wizards</a> were made, they were given extraordinary powers by their makers, the Grand Wizards <a href="${links.elfj}" target="_blank">ElfJ</a> and <a href="${links.dotta}" target="_blank">Dotta</a>. The way their powers were entrusted to them was quite special; they were given a foci as a locus for their power, and some were taught the hidden Runes that grant these Wizards quite incredulous abilities. But not any simpleton can use or even read these runes. The <a href="${links.keymaster}" target="_blank">Sacred Key Master</a> was one of the first few to decipher his Rune and to this day is said to teach the skill of reading runes only to those worthy of becoming a Wizard."
+
+"As the Wizards coalesced into a formidable affiliation (for one must acknowledge that there is no known overarching structure amongst the Wizards), they attracted familiars that helped them with their magic. Famous familiars you may have heard of are <a href="${links.skramps}" target="_blank">Skramps</a>, the <a href="${links.cockatrice}" target="_blank">Mesozoic Cockatrice</a> and the legendary <a href="${links.snail}" target="_blank">Astral Snail</a>."
+
+"Well, little did the Wizards know but the Two had granted them these artefacts, these powers, and even these creatures in a <a href="${links.traits}" target="_blank">very specific way</a>. If they <a href="${links.traitDecoder}" target="_blank">looked carefully</a>, some of the artefacts were more likely <i>to attract</i> each other, <b><i>but</i></b> others, when present, were more likely to create something <i>more evocative</i> - a little of <i>the sum is greater than the parts</i>, if you like."
+
+"For example, old <a href="${links.hothor}" target="_blank">Sage Hothor</a> was likely to end up wearing that bedraggled overcoat of his and drink his ale, which lends to his character. However, the addition of his magnificent familiar the Great Owl made him more than just your typical summoned Wizard because the Great Owl makes his presence and perhaps his magic more... potent. What those pesky Imp archivists call <a href="${links.guide}" target="_blank">Affinity-209</a> is what the Great Owl elevates above and beyond the chance of amalgamation." <i>*Hic*</i>  "I need another beer; it's too early in the morning for this.'"
+
+"So what we think of as <a href="${links.rarityTools}" target="_blank">rare</a> is simply one way to perceive the Wizard. That the Wizard should be in a certain way, what we loosely term affinity, is how the Two assembled her; how the Wizard <i>becomes</i> depends on whether who they are <b>is more</b> than what they were created to be. I hope that is as clear as mud." <i>*burp*</i> 
+`
+emblem = `<a href="${links.site}" target="_blank">Forgotten Runes Wizards Cult</a>`
+
+cssRules = `
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
+body {
+  overflow   : hidden;
+  background-color: #ffa69e;
+  background-image: linear-gradient(315deg, #ffa69e 0%, #9c6482 64%); /* courtesy https://www.eggradients.com/category/dark-gradient */
+}
+#origin {
+  white-space: pre-wrap;
+  position   : absolute;
+  left       : 50%;
+  top        : 50%;
+  height     : 85%;
+  width      : 85%;
+  transform  : translate( -50%, -50% );
+  font-family: 'Neucha', cursive;
+  font-size  : 15pt;
+  z-index    : 3;
+}
+#logo {
+  position   : absolute;
+  left       : 50%;
+  top        : calc(50% + 42.5%);
+  height     : auto;
+  width      : auto;
+  transform  : translate( -50%, -50% );
+  font-family: 'Cinzel Decorative','Neucha', cursive;
+  font-size  : 15pt;
+  z-index    : 5;
+}
+#stranger, #ale, #ale-2, #cockatrice {
+  position   : absolute;
+  opacity    : 0.85;
+  background-size: cover;
+}
+  
+`
+
+addCSS = function(rule, container, ruleIdentifier) {
+  let rc = ruleIdentifier ? ruleIdentifier : 'FRWC-CSS'
+  let output = '<div class="' + rc + '">&shy;<style>' + rule + '</style></div>'
+  document.querySelectorAll(rc).forEach(e => e.remove())
+  if (container) {
+    document.querySelector(container).insertAdjacentHTML('beforeend', output)
+  } else {
+    document.body.insertAdjacentHTML('beforeend', output)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(e) {
+  addCSS(cssRules)
+
+  const content = document.createElement('div')
+        content.setAttribute('id', 'origin')
+        content.innerHTML = origin
+  document.body.appendChild(content)
+
+  const logo = document.createElement('div')
+        logo.setAttribute('id', 'logo')
+        logo.innerHTML = emblem
+  document.body.appendChild(logo)
+
+  const picture = document.createElement('div')
+        picture.setAttribute('id', 'stranger')
+  /* Measure and size the wizard before adding it to the page */
+  let w = window.innerWidth
+  let h = window.innerHeight
+  var desiredWidth = w * 0.15 // percent, remembering that the svg renders the negative space around the head
+  picture.setAttribute('width', desiredWidth)
+  picture.setAttribute('height', desiredWidth)
+  picture.style.left = 'calc(100% - 6% - ' + desiredWidth + 'px)'
+  picture.setAttribute('top', 'calc(0%)')
+  stranger = stranger.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
+  picture.innerHTML = stranger
+  
+  document.body.appendChild(picture)
+
+  const decorator = document.createElement('div')
+        decorator.setAttribute('id', 'ale')
+  desiredWidth = w * 0.15
+  decorator.setAttribute('width', desiredWidth)
+  decorator.setAttribute('height', desiredWidth)
+  decorator.style.right = 'calc(100% - 10% - ' + desiredWidth + 'px)'
+  decorator.style.bottom = 'calc(6.5%)'
+  decorator.style.transform = 'rotate(-14deg)'
+  ale = ale.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
+  decorator.innerHTML = ale
+  
+  document.body.appendChild(decorator)
+
+  const decorator2 = document.createElement('div')
+        decorator2.setAttribute('id', 'ale-2')
+  decorator2.setAttribute('width', desiredWidth)
+  decorator2.setAttribute('height', desiredWidth)
+  decorator2.style.right = 'calc(100% - 0% - ' + desiredWidth + 'px)'
+  decorator2.style.bottom = 'calc(6.5%)'
+  decorator2.style.transform = 'scaleX(-1) rotate(-18deg)'
+  decorator2.innerHTML = ale
+  
+  document.body.appendChild(decorator2)
+
+  const familiar = document.createElement('div')
+        familiar.setAttribute('id', 'cockatrice')
+  familiar.setAttribute('width', desiredWidth)
+  familiar.setAttribute('height', desiredWidth)
+  familiar.style.left = 'calc(100% - 0% - ' + desiredWidth + 'px - 11.5%)'
+  familiar.style.bottom = 'calc(5.5%)'
+  // familiar.style.transform = 'scaleX(-1)'
+  familiar.innerHTML = cockatrice
+  
+  document.body.appendChild(familiar)
+
+})
+
+/* Conversions courtesy of https://onlineconvertfree.com/complete/png-svg/ */
+stranger = `
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">  <image id="image0" width="400" height="400" x="0" y="0"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAElBMVEUAAABMPiT7/4bV4Eui
+qUf///8MQlCaAAAAAXRSTlMAQObYZgAAAAFiS0dEBfhv6ccAAAAJcEhZcwAACxMAAAsTAQCanBgA
+AAAHdElNRQflCRkVLQMJkjA7AAABbElEQVR42u3a0YmDUBRF0bRgC2nBFuy/plHIhYvoxPl6R2et
+n0SSwNlfEnmvFwAAAAAAAAAAAP/WtBq9QYiQZELSCEkas/3uvRq9X4gQIUKEjLWN+WtMRUTdEIUI
+ESJEyBDzaj9qOtEjlpUQIUKECBEyf9Sw7XVulqYi+vdH7xciRIgQIWPV+H1AeX8sO1ERQoQIESJk
+eMx8QXSEkERC0ghJ86iQGnj0XogQIUKyCElTN8T+AO7oumKECBEiRIiQrsZeDYmNEZJGSBohaR4R
+cvXhXIk8dCZEiBAhQiJDjj4TIkSIECFCzkKmA0KECBEiRMg3fWQ/sLwP6QeZhQgRIkSIkNIPl/0m
+OkJIIiFphKR5TEj9iToL6geaYyOEJBKSRkiax4T0oOXAbQKEpBKSRkiax4T0oFvdAIXchZA0QtI8
+JgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAeD9vpSjd24CHdwAAACV0
+RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wOS0yNVQxODo0NTowMyswMzowMNkz7ZAAAAAldEVYdGRhdGU6
+bW9kaWZ5ADIwMjEtMDktMjVUMTg6NDU6MDMrMDM6MDCoblUsAAAAAElFTkSuQmCC" />
+</svg>
+
+` 
+
+ale = `
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">  <image id="image0" width="400" height="400" x="0" y="0"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAADNaD3mkE6eRTnH
+3NCbq7L///9DUcJ1AAAAAXRSTlMAQObYZgAAAAFiS0dEBmFmuH0AAAAJcEhZcwAACxMAAAsTAQCa
+nBgAAAAHdElNRQflCRkTABinUN+KAAABKklEQVR42u3asW3DMABFQa+QFbKCV/AKXiH7jxARMAFC
+SGo+CXeVxOq/ig0fDwAAAAAAAAAAAAAAAAAAAAAAAAAAAGCLr8PuDUKElAmpEVLwfbh0gJAqITVC
+am4RMiOmy0YJqRFSI6TmdiHnoOdh9zYhQgqE1AgpmYNnxPMPuzcKESJEiJC2NeL18f4QIkSIkB4h
+NWP4GDxixvjx/3MY37u3CRFSIKRGSM0cfQ6ZF+O8JHfvFCJEiBAhTTNkHX6+EIUIESKkQ0jNGiCk
+QEiNkBohNUJqhNQIqRFS81/Ia7F7oxAhQoQI6TqPnkGXfDAgpERIjZCaW4SsDwLei/Vs90YhQoQI
+EQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA1C+VOhJudNxAuQAAACV0RVh0ZGF0
+ZTpjcmVhdGUAMjAyMS0wOS0yNVQxNjowMDoyNCswMzowMPKnYBUAAAAldEVYdGRhdGU6bW9kaWZ5
+ADIwMjEtMDktMjVUMTY6MDA6MjQrMDM6MDCD+tipAAAAAElFTkSuQmCC" />
+</svg>
+`
+
+cockatrice = `
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">  <image id="image0" width="400" height="400" x="0" y="0"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAG1BMVEUAAADoOzuuIzT5wisy
+M1MevHMjkGMWWkz///8LyAzGAAAAAXRSTlMAQObYZgAAAAFiS0dECIbelXoAAAAJcEhZcwAACxMA
+AAsTAQCanBgAAAAHdElNRQflCRkXLRH5r5UdAAABZklEQVR42u3cwY3CMBCGUVqghbSwLWwLtEAL
+tL/2KiNZFnf/tt67RBMu852sBMHjAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAbeDardxAiJJmQNELSVEhdr2b1TkKEJBGSRkii5+26rd5HiJA0QtIISfAz+G2uQf/8
+1azeUYgQIUKE5KuQvvi7qfvzHE9IGiFphKQ5JqQ/UL1utfg8b0FIGiFphKQ5IqS+3Kmlx5D3YPWe
+QoQIESIk17fDr+ZPI0SIECFZhKT59lBVEX3e5lAUkkZIGiFpjggZI0qfK2IbQtIISSMkzdEh4wNV
+/EEoJJWQNELSHB8yW72nECFChAjJNcd8BkKECBGSR0iiiqmAfq//QKZfK2SLICFphKQRkuaYkFLL
+C0khJI2QNEKS1J+9CEkhJI2QNEKSjAHzvNVLOiFphKQRkuaYEAAAAAAAAADg3x8V8F39w45NRQAA
+ACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wOS0yNVQyMDo0NToxNyswMzowMMe0P6sAAAAldEVYdGRh
+dGU6bW9kaWZ5ADIwMjEtMDktMjVUMjA6NDU6MTcrMDM6MDC26YcXAAAAAElFTkSuQmCC" />
+</svg>
+`
+</script>

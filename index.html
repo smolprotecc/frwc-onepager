@@ -1,0 +1,180 @@
+<body></body>
+<script>
+
+links = {
+  contractCreation: 'https://etherscan.io/tx/0xeea7020fa751381662b7d8a21dba203a79c0deb894d7f96c47e02bb444862bde',
+  firstSummon     : 'https://etherscan.io/tx/0x8d76ae63c54c53177d64e0d584e52b996d854777ec14e372b4075108a3d58649',
+  traits          : 'https://etherscan.io/tx/0x1be4aa782c9dc164ecbf2cd155537e7250b344f405dff03b5c33fdd63261c80e',
+  decoder         : 'https://gist.github.com/cryppadotta/375dee1903598f5163e2c1d7d3ce9db9',
+  traitDecoder    : 'https://github.com/aleb-user/LostGrimoire/blob/master/scripts/decoder/decode.ts',
+  lorebook        : 'https://www.forgottenrunes.com/lore',
+  exchange        : 'https://opensea.io/collection/forgottenruneswizardscult',
+  roadmap         : 'https://www.forgottenrunes.com/posts/roadmap',
+  discord         : 'https://discord.com/invite/forgottenrunes',
+  site            : 'https://forgottenrunes.com',
+  guide           : 'https://wizards.guide/',
+}
+
+origin = `
+"So, you wish to know about the Wizards, stranger? Buy me a beer and listen up."
+
+"In the beginning, the Grand Wizards Dotta and ElfJ imagined a Greater Universe than one that existed in the Beyond. So with great cunning and wisdom, they laid forth an incantation that sparked to life this Greater Universe and everything you see in it. To safeguard their Universe from the forces of the Ysidne, they poured their might and ferocity into the Crystal that lay at the heart of this Greater Universe. However, the Grand Wizards were wise as they foresaw a time when the Ysidne would send forth a bloody assault on their Creation; to protect all that <i>Is</i> and all that <i>Is To Come</i>, they shattered the Crystal into precisely <a href="${links.contractCreation}" target="_blank">twelve million, seven hundred and nineteen thousand, nine hundred and eight shards</a> and spread them all across the Greater Universe." 
+
+"Now the Grand Wizards knew they needed to combat ever greater avarice against their Creation and so they marshalled the deepest reservoirs of their ancient powers; with the assistance of ancient ethereal allies and like-minded magicians from the Beyond, they <a href="${links.firstSummon}" target="_blank">summoned</a> the legendary Wizards into being. Ten thousand were forged in the fires of their mighty sorcery, ten thousand beings of incredible power and guile created for the purpose of defending the Creation against enemies, both old and new. As the Wizards opened their newly formed eyes to the brand new Universe, they sung in great delight at what they were experiencing and blessed the Two. They sung in procession before the mighty Two and as they passed them, each were <a href="${links.traits}" target="_blank">granted extraordinary powers</a> befitting their nature and their character. When the Song of Jubilation ended, the First worlds had formed, and the <a href="${links.lorebook}" target="_blank">great Stories</a> were already begun. Even you, stranger, would have heard of some of these." 
+
+"To assist the Wizards with their task, the ancient allies of the Grand Wizards forged for the Two a multitude of clay vessels into which they would pour mighty spirits harvested from the Old World; spirits of powerful warriors, soldiers and fighters. These vessels would, in time, form long-lasting and deep bonds with Wizards as they traversed the Universe in endless pursuit of glory and <a href="${links.roadmap}" target="_blank">unceasing wardenship</a>."
+
+"These Wizards were the ones who taught our ancestors the magic we know and use. Some say that if you own one of the Original Shards, you can <a href="${links.decoder}" target="_blank">scry for the wandering Wizards</a> through the crystal and even <a href="${links.traitDecoder}" target="_blank">see their powers directly</a> should you <a href="${links.exchange}" target="_blank">chance upon</a> a Wizard. <i>'Old magic is safer forgotten'</i> or so they say. What wondrous deeds they would have done in their time and what marvels we still behold to this day! If only our historians had taken the time to <a href="${links.guide}" target="_blank">record their likeness</a> so we could remember what they look like and see if they still yet conceal themselves amongst us."
+
+"More than Defenders though, these Wizards were imbued with a piece of the Grand Wizards themselves, granted authority to <a href="${links.discord}" target="_blank">continue the mission</a> of completing the Greater Universe that you and I live in. But can such a herculean task be completed? Some say that in the early eras of the Greater Universe, many Wizards died to further their task of bringing Creation to Life. Some even say the Wizards are creating to this day. But who truly knows, stranger?"
+
+`
+emblem = `<a href="${links.site}" target="_blank">Forgotten Runes Wizards Cult</a>`
+
+cssRules = `
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
+body {
+  overflow   : hidden;
+  background-color: #ffa69e;
+  background-image: linear-gradient(315deg, #ffa69e 0%, #9c6482 64%); /* courtesy https://www.eggradients.com/category/dark-gradient */
+}
+#origin {
+  white-space: pre-wrap;
+  position   : absolute;
+  left       : 50%;
+  top        : 50%;
+  height     : 85%;
+  width      : 85%;
+  transform  : translate( -50%, -50% );
+  font-family: 'Neucha', cursive;
+  font-size  : 15pt;
+  z-index    : 3;
+}
+#logo {
+  position   : absolute;
+  left       : 50%;
+  top        : calc(50% + 42.5%);
+  height     : auto;
+  width      : auto;
+  transform  : translate( -50%, -50% );
+  font-family: 'Cinzel Decorative','Neucha', cursive;
+  font-size  : 15pt;
+  z-index    : 5;
+}
+#stranger, #ale, #ale-2 {
+  position   : absolute;
+  opacity    : 0.85;
+  background-size: cover;
+}
+  
+`
+
+addCSS = function(rule, container, ruleIdentifier) {
+  let rc = ruleIdentifier ? ruleIdentifier : 'FRWC-CSS'
+  let output = '<div class="' + rc + '">&shy;<style>' + rule + '</style></div>'
+  document.querySelectorAll(rc).forEach(e => e.remove())
+  if (container) {
+    document.querySelector(container).insertAdjacentHTML('beforeend', output)
+  } else {
+    document.body.insertAdjacentHTML('beforeend', output)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(e) {
+  addCSS(cssRules)
+
+  const content = document.createElement('div')
+        content.setAttribute('id', 'origin')
+        content.innerHTML = origin
+  document.body.appendChild(content)
+
+  const logo = document.createElement('div')
+        logo.setAttribute('id', 'logo')
+        logo.innerHTML = emblem
+  document.body.appendChild(logo)
+
+  const picture = document.createElement('div')
+        picture.setAttribute('id', 'stranger')
+  /* Measure and size the wizard before adding it to the page */
+  let w = window.innerWidth
+  let h = window.innerHeight
+  var desiredWidth = w * 0.15 // percent, remembering that the svg renders the negative space around the head
+  picture.setAttribute('width', desiredWidth)
+  picture.setAttribute('height', desiredWidth)
+  picture.style.left = 'calc(100% - 6% - ' + desiredWidth + 'px)'
+  picture.setAttribute('top', 'calc(0%)')
+  stranger = stranger.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
+  picture.innerHTML = stranger
+  
+  document.body.appendChild(picture)
+
+  const decorator = document.createElement('div')
+        decorator.setAttribute('id', 'ale')
+  desiredWidth = w * 0.15
+  decorator.setAttribute('width', desiredWidth)
+  decorator.setAttribute('height', desiredWidth)
+  decorator.style.right = 'calc(100% - 10% - ' + desiredWidth + 'px)'
+  decorator.style.bottom = 'calc(6.5%)'
+  decorator.style.transform = 'rotate(-14deg)'
+  ale = ale.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
+  decorator.innerHTML = ale
+  
+  document.body.appendChild(decorator)
+
+  const decorator2 = document.createElement('div')
+        decorator2.setAttribute('id', 'ale-2')
+  decorator2.setAttribute('width', desiredWidth)
+  decorator2.setAttribute('height', desiredWidth)
+  decorator2.style.right = 'calc(100% - 0% - ' + desiredWidth + 'px)'
+  decorator2.style.bottom = 'calc(6.5%)'
+  decorator2.style.transform = 'scaleX(-1) rotate(-18deg)'
+  decorator2.innerHTML = ale
+  
+  document.body.appendChild(decorator2)
+
+})
+
+/* Conversions courtesy of https://onlineconvertfree.com/complete/png-svg/ */
+stranger = `
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+x="0px" y="0px" width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+<image id="image0" width="400" height="400" x="0" y="0" 
+href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAJ1BMVEUAAACQXqmohPNrPnVN
+m+aP0/9NZbRFKT9iVWWWbGz7/4ZISnf///+Fg9DaAAAAAXRSTlMAQObYZgAAAAFiS0dEDIGzUWMA
+AAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflCRkRODX2lOtqAAABzElEQVR42u3bzWnDQBSF
+0bTgFtKCW0gLacEtuAW3kBbSgpuLBvRgMCMrIYS5ROdsLGMv3ocWw+jn5QUAAAAA+JXTavYcQoSk
+EpJGSIo2/OuifZ4Xs+cRIiSNkDRCUlRARQiZTUgaIWmEJBlFCBEiREguISlq4FGEECFChOQRkuRt
+9d5p3/sIIUKECMkhZIbzhtOGirushAgRIkTIcUPaENeB8xP9YlgxszuECBEiREhOxJ6tQCFChAgR
+IuS3UUKECBEi5DghezG3xUfntvpOlBAhQoQIOUbIXkwFXX8g8qwIESJEiJA/j6mgduOmFr/Pxei4
+uS/2goQIESJEyDFC+qAW0h5UbpupNnxtrOq4RbTf2/9iY4QIESJEyJSQNtzo5ZdH9cCZECFChAgR
+8hhSL01uuXSehUzdWAkRIkSIkClq0H7xG0XU8ShkaoAQIUKECJmqIi4bRhur2TMLESJEiJAstfiN
+Lsz1i2J0hJBEQtIISfNvQtqAexfn4iOEJBKSRkiafxNSMaON1X01ez4hQmYTkkZIoseYuqkzey4h
+QlIISSMEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4rC/KdP+EClriCwAA
+ACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wOS0yNVQxNDo1Njo1MyswMzowMCHQPswAAAAldEVYdGRh
+dGU6bW9kaWZ5ADIwMjEtMDktMjVUMTQ6NTY6NTMrMDM6MDBQjYZwAAAAAElFTkSuQmCC" />
+</svg>
+` 
+
+ale = `
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">  <image id="image0" width="400" height="400" x="0" y="0"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAADNaD3mkE6eRTnH
+3NCbq7L///9DUcJ1AAAAAXRSTlMAQObYZgAAAAFiS0dEBmFmuH0AAAAJcEhZcwAACxMAAAsTAQCa
+nBgAAAAHdElNRQflCRkTABinUN+KAAABKklEQVR42u3asW3DMABFQa+QFbKCV/AKXiH7jxARMAFC
+SGo+CXeVxOq/ig0fDwAAAAAAAAAAAAAAAAAAAAAAAAAAAGCLr8PuDUKElAmpEVLwfbh0gJAqITVC
+am4RMiOmy0YJqRFSI6TmdiHnoOdh9zYhQgqE1AgpmYNnxPMPuzcKESJEiJC2NeL18f4QIkSIkB4h
+NWP4GDxixvjx/3MY37u3CRFSIKRGSM0cfQ6ZF+O8JHfvFCJEiBAhTTNkHX6+EIUIESKkQ0jNGiCk
+QEiNkBohNUJqhNQIqRFS81/Ia7F7oxAhQoQI6TqPnkGXfDAgpERIjZCaW4SsDwLei/Vs90YhQoQI
+EQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA1C+VOhJudNxAuQAAACV0RVh0ZGF0
+ZTpjcmVhdGUAMjAyMS0wOS0yNVQxNjowMDoyNCswMzowMPKnYBUAAAAldEVYdGRhdGU6bW9kaWZ5
+ADIwMjEtMDktMjVUMTY6MDA6MjQrMDM6MDCD+tipAAAAAElFTkSuQmCC" />
+</svg>
+`
+</script>

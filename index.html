@@ -48,32 +48,64 @@ body {
   flex-direction  : column;
   background-color: #ffa69e;
   background-image: linear-gradient(315deg, #ffa69e 0%, #9c6482 64%); /* courtesy https://www.eggradients.com/category/dark-gradient */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
 }
-#origin {
+body::-webkit-scrollbar {
+  display:none;
+  width: 0;
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+#main {
   flex           : 1;
   display        : flex;
   flex-direction : column;
+  padding        : 1.3em;
   align-items    : center;
-  justify-content: center;
+  display        : inline-block;
   white-space    : pre-wrap;
   font-family    : 'Neucha', cursive;
   font-size      : 15pt;
   z-index        : 3;
 }
+#main a {
+  display    : inline-block;
+}
 #footer {
   text-align : center;
   line-height: calc(1.5ch + 10px);
-  padding    : 10px;
+  padding    : 1.1em;
   font-family: 'Cinzel Decorative','Neucha', cursive;
   font-size  : 15pt;
   z-index    : 5;
+  background : rgba( 255, 255, 255, 0.11 );
+  backdrop-filter: blur(10px) saturate(100%) contrast(100%) brightness(100%);
 }
 #stranger, #ale, #ale-2 {
   position   : absolute;
   opacity    : 0.85;
-  background-size: cover;
+  background-size: contain;
 }
-  
+.FRWC-CSS {
+  display:none;
+}
 `
 
 addCSS = function(rule, container, ruleIdentifier) {
@@ -91,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   addCSS(cssRules)
 
   const content = document.createElement('div')
-        content.setAttribute('id', 'origin')
+        content.setAttribute('id', 'main')
         content.innerHTML = origin
   document.body.appendChild(content)
 
@@ -105,10 +137,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
   /* Measure and size the wizard before adding it to the page */
   let w = window.innerWidth
   let h = window.innerHeight
-  var desiredWidth = w * 0.15 // percent, remembering that the svg renders the negative space around the head
+  let s = 180
+  var desiredWidth = s > w * 0.15 ? s + 'px' : w * 0.15 // percent, remembering that the svg renders the negative space around the head
   picture.setAttribute('width', desiredWidth)
   picture.setAttribute('height', desiredWidth)
-  picture.style.left = 'calc(100% - 6% - ' + desiredWidth + 'px)'
+  picture.style.left = 'calc(100% - 6% - ' + desiredWidth + ')'
   picture.setAttribute('top', 'calc(0%)')
   stranger = stranger.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
   picture.innerHTML = stranger
@@ -117,11 +150,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
   const decorator = document.createElement('div')
         decorator.setAttribute('id', 'ale')
-  desiredWidth = w * 0.15
+  desiredWidth = s > w * 0.15 ? s + 'px' : w * 0.15 // w * 0.15
   decorator.setAttribute('width', desiredWidth)
   decorator.setAttribute('height', desiredWidth)
-  decorator.style.right = 'calc(100% - 10% - ' + desiredWidth + 'px)'
-  decorator.style.bottom = 'calc(6.5%)'
+  decorator.style.left = '4.7em' // 'calc(100% - 10% - ' + desiredWidth + 'px)'
+  decorator.style.bottom = '3em'
   decorator.style.transform = 'rotate(-14deg)'
   ale = ale.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
   decorator.innerHTML = ale
@@ -132,8 +165,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
         decorator2.setAttribute('id', 'ale-2')
   decorator2.setAttribute('width', desiredWidth)
   decorator2.setAttribute('height', desiredWidth)
-  decorator2.style.right = 'calc(100% - 0% - ' + desiredWidth + 'px)'
-  decorator2.style.bottom = 'calc(6.5%)'
+  decorator2.style.left = 'calc(3.9em)' // 'calc(100% - 0% - ' + desiredWidth + 'px)'
+  decorator2.style.bottom = '3em'
   decorator2.style.transform = 'scaleX(-1) rotate(-18deg)'
   decorator2.innerHTML = ale
   

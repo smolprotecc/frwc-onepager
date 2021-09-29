@@ -68,13 +68,10 @@ body {
   font-size  : 15pt;
   z-index    : 3;
 }
-#logo {
-  position   : absolute;
-  left       : 50%;
-  top        : calc(50% + 42.5%);
-  height     : auto;
-  width      : auto;
-  transform  : translate( -50%, -50% );
+#footer {
+  text-align : center;
+  line-height: calc(1.5ch + 10px);
+  padding    : 10px;
   font-family: 'Cinzel Decorative','Neucha', cursive;
   font-size  : 15pt;
   z-index    : 5;
@@ -106,10 +103,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
         content.innerHTML = origin
   document.getElementById('main').appendChild(content)
 
-  const logo = document.createElement('div')
-        logo.setAttribute('id', 'logo')
-        logo.innerHTML = emblem
-  document.body.appendChild(logo)
+  const footer = document.createElement('div')
+        footer.setAttribute('id', 'footer')
+        footer.innerHTML = emblem
+  document.body.appendChild(footer)
 
   const picture = document.createElement('div')
         picture.setAttribute('id', 'stranger')

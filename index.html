@@ -1,5 +1,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<body><div id='main'></div></body>
+<body></body>
 <script>
 
 links = {
@@ -49,24 +49,16 @@ body {
   background-color: #ffa69e;
   background-image: linear-gradient(315deg, #ffa69e 0%, #9c6482 64%); /* courtesy https://www.eggradients.com/category/dark-gradient */
 }
-#main {
+#origin {
   flex           : 1;
   display        : flex;
   flex-direction : column;
   align-items    : center;
   justify-content: center;
-}
-#origin {
-  white-space: pre-wrap;
-  position   : absolute;
-  left       : 50%;
-  top        : 50%;
-  height     : 85%;
-  width      : 85%;
-  transform  : translate( -50%, -50% );
-  font-family: 'Neucha', cursive;
-  font-size  : 15pt;
-  z-index    : 3;
+  white-space    : pre-wrap;
+  font-family    : 'Neucha', cursive;
+  font-size      : 15pt;
+  z-index        : 3;
 }
 #footer {
   text-align : center;
@@ -101,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   const content = document.createElement('div')
         content.setAttribute('id', 'origin')
         content.innerHTML = origin
-  document.getElementById('main').appendChild(content)
+  document.body.appendChild(content)
 
   const footer = document.createElement('div')
         footer.setAttribute('id', 'footer')

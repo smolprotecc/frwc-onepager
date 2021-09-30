@@ -38,6 +38,7 @@ cssRules = `
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
+.FRWC-CSS { display:none; } /* CSS Rules */
 html, body {
   padding    : 0px;
   margin     : 0px;
@@ -48,7 +49,7 @@ body {
   flex-direction  : column;
   background-color: #ffa69e;
   background-image: linear-gradient(315deg, #ffa69e 0%, #9c6482 64%); /* courtesy https://www.eggradients.com/category/dark-gradient */
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-27deg, #f08969, #d6407a, #8060bf, #3cade6, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   height: 100vh;
@@ -88,6 +89,9 @@ body::-webkit-scrollbar-thumb {
 #main a {
   display    : inline-block;
 }
+#main::selection, #main a::selection, #main i::selection {
+  background: rgba(255,255,255,0.41);
+}
 #footer {
   text-align : center;
   line-height: calc(1.5ch + 10px);
@@ -100,11 +104,11 @@ body::-webkit-scrollbar-thumb {
 }
 #stranger, #ale, #ale-2 {
   position   : absolute;
-  opacity    : 0.85;
+  opacity    : 0.75;
   background-size: contain;
 }
-.FRWC-CSS {
-  display:none;
+#ale, #ale-2 {
+  opacity    : 0.55;
 }
 `
 
@@ -132,46 +136,33 @@ document.addEventListener('DOMContentLoaded', function(e) {
         footer.innerHTML = emblem
   document.body.appendChild(footer)
 
-  const picture = document.createElement('div')
-        picture.setAttribute('id', 'stranger')
+  addCSS(`#footer {position:relative; z-index: 1;}`)
+
   /* Measure and size the wizard before adding it to the page */
   let w = window.innerWidth
   let h = window.innerHeight
-  let s = 180
-  var desiredWidth = s > w * 0.15 ? s + 'px' : w * 0.15 // percent, remembering that the svg renders the negative space around the head
-  picture.setAttribute('width', desiredWidth)
-  picture.setAttribute('height', desiredWidth)
-  picture.style.left = 'calc(100% - 6% - ' + desiredWidth + ')'
-  picture.setAttribute('top', 'calc(0%)')
-  stranger = stranger.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
-  picture.innerHTML = stranger
+  let s = 230
   
+  var desiredWidth = s > w * 0.15 ? s + 'px' : w * 0.15 // percent, remembering that the svg renders the negative space around the head
+  const picture = document.createElement('div')
+        picture.setAttribute('id', 'stranger')
+  addCSS(`#stranger {width:${desiredWidth}; height:${desiredWidth}; left:calc(100% - 6% - ${desiredWidth}); top:0%;}`)
+  picture.innerHTML = stranger.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
   document.body.appendChild(picture)
 
   const decorator = document.createElement('div')
         decorator.setAttribute('id', 'ale')
   desiredWidth = s > w * 0.15 ? s + 'px' : w * 0.15 // w * 0.15
-  decorator.setAttribute('width', desiredWidth)
-  decorator.setAttribute('height', desiredWidth)
-  decorator.style.left = '4.7em' // 'calc(100% - 10% - ' + desiredWidth + 'px)'
-  decorator.style.bottom = '3em'
-  decorator.style.transform = 'rotate(-14deg)'
+  addCSS(`#ale {width:${desiredWidth}; height:${desiredWidth}; z-index:1; left:calc(${desiredWidth} * 0.67); bottom:calc(${desiredWidth} * 0.28); transform:rotate(-14deg);}`)
   ale = ale.replace('width="400px" height="400px"','width="' + desiredWidth + 'px" height="' + desiredWidth + 'px"')
   decorator.innerHTML = ale
-  
-  document.body.appendChild(decorator)
+  document.getElementById('footer').appendChild(decorator)
 
   const decorator2 = document.createElement('div')
         decorator2.setAttribute('id', 'ale-2')
-  decorator2.setAttribute('width', desiredWidth)
-  decorator2.setAttribute('height', desiredWidth)
-  decorator2.style.left = 'calc(3.9em)' // 'calc(100% - 0% - ' + desiredWidth + 'px)'
-  decorator2.style.bottom = '3em'
-  decorator2.style.transform = 'scaleX(-1) rotate(-18deg)'
+  addCSS(`#ale-2 {width:${desiredWidth}; height:${desiredWidth}; z-index:1; left:calc(${desiredWidth} * 0.01); bottom:calc(${desiredWidth} * 0.28); transform:scaleX(-1) rotate(-18deg);}`)
   decorator2.innerHTML = ale
-  
-  document.body.appendChild(decorator2)
-
+  document.getElementById('footer').appendChild(decorator2)
 })
 
 /* Conversions courtesy of https://onlineconvertfree.com/complete/png-svg/ */
